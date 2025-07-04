@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import "../lib/test-env.ts";
 
 export const supabase = createClient(
   import.meta.env.SUPABASE_URL,
