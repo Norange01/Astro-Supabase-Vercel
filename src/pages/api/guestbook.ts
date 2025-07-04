@@ -1,7 +1,10 @@
 import type { APIRoute } from "astro";
-import { supabase } from "../../lib/supabase";
+import { getSupabase } from "../../lib/supabase";
+
 
 export const GET: APIRoute = async () => {
+  const supabase = getSupabase();
+
   const { data, error } = await supabase
     .from("guestbook")
     .select("*")
@@ -20,6 +23,7 @@ export const GET: APIRoute = async () => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
+  const supabase = getSupabase();
   const { name, message } = await request.json();
   const { data, error } = await supabase
     .from("guestbook")

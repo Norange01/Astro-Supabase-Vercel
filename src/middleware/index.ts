@@ -1,5 +1,5 @@
 import { defineMiddleware } from "astro:middleware";
-import { supabase } from "../lib/supabase";
+import { getSupabase } from "../lib/supabase";
 import micromatch from "micromatch";
 
 const protectedRoutes = ["/dashboard(|/)"];
@@ -8,6 +8,8 @@ const proptectedAPIRoutes = ["/api/guestbook(|/)"];
 
 export const onRequest = defineMiddleware(
   async ({ locals, url, cookies, redirect }, next) => {
+    const supabase = getSupabase();
+
     if (micromatch.isMatch(url.pathname, protectedRoutes)) {
       const accessToken = cookies.get("sb-access-token");
       const refreshToken = cookies.get("sb-refresh-token");
