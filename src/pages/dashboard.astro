@@ -1,13 +1,9 @@
 ---
 import Base from "../layout/Base.astro";
-import { getSupabase } from "../lib/supabase";
-
+import { supabase } from "../lib/supabase";
 import { Reviews, type GuestbookEntry } from "../components/Reviews";
 
 const { email } = Astro.locals;
-
-const supabase = getSupabase();
-
 
 const { data } = (await supabase
   .from("guestbook")

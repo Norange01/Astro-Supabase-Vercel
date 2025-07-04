@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
-import { getSupabase } from "../../../lib/supabase";
-
+import { supabase } from "../../../lib/supabase";
 
 export const GET: APIRoute = async ({ url, cookies, redirect }) => {
   const authCode = url.searchParams.get("code");
@@ -8,9 +7,6 @@ export const GET: APIRoute = async ({ url, cookies, redirect }) => {
   if (!authCode) {
     return new Response("No code provided", { status: 400 });
   }
-
-  const supabase = getSupabase();
-
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(authCode);
 
